@@ -1,0 +1,26 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1582920840104.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2817713753",
+    "id" : "92C8CC79",
+    "lastKnownWriteTime" : 1582922988,
+    "last_content_update" : 1582922988,
+    "path" : "~/Bachelor/Paket_BHT/BTBA1/R/dilfact.R",
+    "project_path" : "R/dilfact.R",
+    "properties" : {
+        "cursorPosition" : "20,0",
+        "marks" : "<:20,-1\n>:20,0",
+        "scrollLine" : "1"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

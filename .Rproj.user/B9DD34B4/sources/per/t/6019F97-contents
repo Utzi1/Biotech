@@ -1,0 +1,420 @@
+---
+title: "Zusammenfassung Februar"
+bibliography: ../Bibliographie/Bibliogrphie_BA_1.bib
+fontfamily: arev
+output:
+  pdf_document:
+    fig_caption: yes
+    keep_tex: yes
+    toc : yes
+geometry: margin=1in
+fontsize: 11pt
+---
+```{r, include = FALSE}
+library(tidyverse)
+library(MASS)
+```
+
+# Übersicht
+In den letzten Wochen wurden vor allem oft angewandte Methoden im Studiengang Biotechnologie untersucht, dabei wurde das Haupaugenmerk auf möglichst einfachen Code gelegt weil:
+
+* im Studiengang Biotechnologie keine Vorkentnisse für das Verständnis von Computersprachen gegeben sind
+* den Studenten eine einfache Syntax als Anreiz $R$ zu erlernen gegeben wird
+* Der bisherige Code vor allem als Basis für Ergänzungen und Verfeinerungen dient 
+
+Die bisher verwendeten Pakete sind:
+
+* tidyverse
+    + ggplot
+    + dplyr
+    + magrittr 
+* MASS
+* base
+* stats
+* dr4pl
+
+## Probleme mit \texttt{drc()}
+Leider kann das Paket \texttt{drc()} nicht installiert werden, hier die Orginalfehlermeldung:
+\begin{verbatim}
+Installing package into ‘/home/bachelor/R/x86_64-pc-linux-gnu-library/3.4’
+(as ‘lib’ is unspecified)
+Warning in install.packages :
+  dependencies ‘car’, ‘plotrix’, ‘mvtnorm’ are not available
+also installing the dependency ‘multcomp’
+
+versuche URL 'https://cloud.r-project.org/src/contrib/multcomp_1.4-12.tar.gz'
+Content type 'application/x-gzip' length 609805 bytes (595 KB)
+==================================================
+downloaded 595 KB
+
+versuche URL 'https://cloud.r-project.org/src/contrib/drc_3.0-1.tar.gz'
+Content type 'application/x-gzip' length 238540 bytes (232 KB)
+==================================================
+downloaded 232 KB
+
+ERROR: dependency ‘mvtnorm’ is not available for package ‘multcomp’
+* removing ‘/home/bachelor/R/x86_64-pc-linux-gnu-library/3.4/multcomp’
+Warning in install.packages :
+  installation of package ‘multcomp’ had non-zero exit status
+ERROR: dependencies ‘car’, ‘multcomp’, ‘plotrix’ are not available for package ‘drc’
+* removing ‘/home/bachelor/R/x86_64-pc-linux-gnu-library/3.4/drc’
+Warning in install.packages :
+  installation of package ‘drc’ had non-zero exit status
+
+The downloaded source packages are in
+	‘/tmp/Rtmpjnnwya/downloaded_packages’
+\end{verbatim}
+Das Paket drc() verfügt jedoch über umfassendes Werkzeug zur Auswertung vieler Experimente mit Bezug zum Studiengang Biotechnologie.
+Um einzelne Funktionen zu testen können diese Trozdem aus dem GitHub Repository [https://github.com/cran/drc/tree/master/R] kopiert und lokal verwendet werden.
+
+# Bisher implementierte Funktionen
+
+## Konzentrationsbestimmung
+
+Konzentrationsbestimmungen auf der Basis von linearen Regressionen sind ein Standardverfahren, die Methode dahinter ist leicht durchführbar und Zuverlässig.
+Ein klassisches Beispiel ist der Bradford-Test [@BRADFORD1976248] aber auch die Untersuchung von Nucleinsäurenkonzentrationen, dazu säter mehr.
+Die Funktion zu dieser Methode heist conc_eval() und hat die Argumente: 
+
+* **abs_P** die unbekannte Absorption der Probe
+* **abs_std** die Absorption der Standardreihe
+* **conc_std** die Konzentration der Standardreihe
+
+```{r include=FALSE}
+conc_eval <- function(abs_P, abs_std, conc_std){
+  (LinMod <- stats::lm(
+                       conc_std ~ abs_std)
+  )
+    base::print(base::summary(LinMod))
+  base::print(
+              abs_P * LinMod$coefficients[2] + LinMod$coefficients[1]
+  )
+}
+```
+Aus Messdaten der WUB-Gruppe A1 vom 05.08.18 wird beispielsweise die Funktion angewandt:
+```{r}
+abs <- c(0, 79.4, 119.7, 181.8, 352.9) # Hier wurde die 
+    # Peakfläche als Maß für die Konzentration genommen
+conc <- c(0, .125, .25, .375, .5) # die Konzentration
+abs_P = 119.7
+conc_eval(abs_P = abs_P, abs_std = abs, conc_std = conc)
+```
+So bekommt man die wichtigen Informationen gleich ausgegeben, es sind auch Vektorn als abs_P() möglich:
+```{r}
+# Berechnung der ist-Konzentration durch das Reressionsmodell:
+conc_eval(abs_P = abs, abs_std = abs, conc_std = conc) 
+```
+Die Funktion **plot_regression()** ermöglicht das Plotten der Standardreihe und ergänzt sie dann mit einer Regressionsgerade sowei grau unterlegten Konfidenzintervallen.
+```{r, include = FALSE}
+plot_regression <- function(abs, conc){
+  ggplot2::ggplot(mapping = ggplot2::aes(abs, conc))+
+    ggplot2::geom_point()+
+    ggplot2::geom_smooth(method = "lm")
+}
+```
+```{r}
+plot_regression(abs = abs, conc = conc)
+```
+
+### Ausblick
+
+Um eine schönere Tabelle zu erhalten, besteht das Bestreben den Output von conc_eval() in ein gut exportierbares Tabellenformat zu überführen (\LaTeX über KableExtra() ,huxtable() oder formattable()).
+Im Bezug auf plot_regression() ist die Einführung zweier optionalen Argumente zur Achsenbeschriftung angedacht.
+
+## Enzymkinetik
+
+### Linewavear-Burk-Plot 
+
+Die doppelreziproke Auftragung von Substratkonzentration gegen die katalytische Aktivität 
+ eines Enzyms ermöglicht es im Vorfeld, die enzymkinetischen Konstanten für ein Enzym vom Michaelis-Menten-Typ zu bestimmen, für dieses gilt:
+ \[v_0 = \frac{v_\mathrm{max} \cdot [\mathrm S]}{K_{\mathrm m} + [\mathrm S]}\]
+Wobei uns der x-Achsenschnittpunkt $-\frac{1}{K_m}$ und der y-Achsenschnittpunkt $\frac{1}{V_{max}}$ entspricht.
+```{r, include = FALSE}
+Lineweaver_Burk <- function(sub, vel){
+  ggplot2::ggplot(mapping = ggplot2::aes(
+    x = 1/sub,
+    y = 1/vel
+  ))+
+    ggplot2::geom_point()+
+    ggplot2::geom_smooth(
+      method = "lm",
+      fullrange = TRUE
+    )+
+    ggplot2::scale_x_continuous(expand=c(0,0), limits=c(0, max(1/sub+ 1))) +
+    ggplot2::scale_y_continuous(expand=c(0,0), limits=c(0, max(1/vel + .01))) +
+    ggplot2::ggtitle("Lineweaver-Burk-Plot")
+#  Velo <-1/vel
+#  Subs <- 1/sub
+#  stats::coefficients(
+#    stats::lm(Velo~Subs)
+#  )
+}
+sub <-seq(0,19,1)
+vel <-(
+  (runif(1,14.7,15)*sub
+  )/( # Könnt ihr die MM-Kinetik wiedererkennen? ;-)
+    runif(1,2.5,3)+sub))+rnorm(20,0,.3)
+Daten <- tibble(sub, vel)
+```
+```{r}
+sub <- c(2.5e-06, 3.33e-06, 4.0e-06, 5.0e-06, 1.0e-05,
+         2.0e-05, 4.0e-05, 1.0e-04, 2.0e-03, 1.0e-02)
+vel <- c(24, 30, 34, 40, 60, 80, 96, 109, 119, 120)
+Lineweaver_Burk(sub = sub, vel = vel)
+```
+```{r}
+library(pander)
+library(magrittr)
+daten <- tibble(sub, vel)
+daten %>%
+    pander()
+```
+
+Die Daten zu sub und vel wurden dieses Mal nicht selbst generiert, sondern zufällig unter [https://gist.github.com/friveroll/2779025] gefunden.
+Die Funktion wäre noch ergänzbar mit eingeplotteten Werten für y-intercept, slope und x-intercept.
+
+## Eadie-Hofstee-Plot
+
+Eine weitere Plotting-Methode zur Bestimmung der enzymspezifischen Konstanten ist der Eadie-Hofstee-Plot, dieser stellt den Zusammenhang dar:
+\[v = -K_m { v \over [S] } + v_\text{max}\]
+```{r include=FALSE}
+Eadie_Hofstee <- function(vel, sub){
+print(  ggplot2::ggplot(mapping = ggplot2::aes(
+    x = vel/sub,
+    y = vel)
+    )+
+    ggplot2::geom_point()+
+   ggplot2::geom_smooth(method = "lm",
+               fullrange = TRUE)+
+   ggplot2::scale_x_continuous(expand=c(0,0), limits=c(0, base::max(vel/sub))) +
+   ggplot2::scale_y_continuous(expand=c(0,0), limits=c(0, base::max(vel)+20))+
+   ggplot2::ggtitle("Eadie-Hostee-Plot"))
+print(base::summary(
+  stats::lm(vel/sub~vel)
+  ))    
+}
+```
+```{r}
+Eadie_Hofstee(vel = vel, sub = sub)
+```
+
+## Direkte Auftragung der Werte
+
+```{r, include = FALSE}
+plot_MM_direct <- function(sub, velo){
+
+    # Fitten des SSmicmen-Modell
+
+    fit <- nls(velo ~ SSmicmen(sub, Vm, K)) %>%
+        print()
+
+    # plotten des Fits
+
+    ggplot2::ggplot(mapping = ggplot2::aes(x = sub, y = velo))+
+       ggplot2::geom_point()+
+       ggplot2::stat_function(fun = function(sub){ (coef(fit)[[1]] * sub) / ( coef(fit)[[2]] + sub)}, color = "blue")+ # einzeichnen des Fitting
+       ggplot2::geom_hline(yintercept = coef(fit)[[1]])+ # Vmax aus coefficents eintragen
+       ggplot2::geom_text(ggplot2::aes(0,coef(fit)[[1]],label = round(coef(fit)[[1]], digits = 3), vjust = 1.4), hjust = .3 )+ # Vmax aus coefficents eintragen
+       ggplot2::geom_hline(yintercept =( coef(fit)[[1]])/2,)+ # Vmax/2 aus coefficents
+       ggplot2::geom_text(ggplot2::aes(0,(coef(fit)[[1]])/2,label = "Vmax/2", vjust = 1.4), hjust = .3)+ # Vmax/2 aus coefficents eintragen
+       ggplot2::geom_vline(xintercept = coef(fit)[[2]])+ # Km aus coefficents
+       ggplot2::geom_text(ggplot2::aes(0,coef(fit)[[2]],label = round(coef(fit)[[2]], digits = 3), vjust = 1.41), hjust = -2.3) # Km aus coefficents eintragen
+}
+```
+Die enzymspezifischen Konstanten werden über die Funktion SSmicmen() [@R_gen] ermittelt.
+Im Anschluss werden die Messwerte mit den ermittleten Konstanten geplottet:
+```{r}
+plot_MM_direct(sub = sub, velo = vel)
+```
+
+### Ausblick
+
+Die bisher implementierten Funktionen auf dem Feld der Enzymkinetik werden in den Grundpraktika angewandt, sie sind mit Excel nur schwer oder teilweise kaum sinnvoll durchführbar.
+Die Argumente der Funktionen sind dieselben, tragen aber bisher noch unterschiedliche Abkürzugen und Namen - es stellt sich die Frage: Welche Bennenung ist sinnvoll?
+Hierbei sind bereits Ansätze gegeben: 
+
+* volle Namen des entsprechenden Arguments auf deutsch
+* volle Namen des entsprechenden Arguments auf englisch
+* Abkürzungen, aber einheitlich, abgeleitet aus dem Englischen
+
+## Dose-Response-Modelle
+
+Ähnlich wie in @dr4pManual wird hier eine Funktion zum Errechnen von Koeffizienten für eine 4-Parameter-logistische Funktion implementiert und anschließend gleich geplottet.
+Die hierbei verwendete Methode ist nicht so anfällig für Fehler wie jene aus dem Paket drc() [@drm/journal.pone.0146021].
+
+```{r, include = FALSE}
+dose_response_plot <- function (conc, resp) {
+    # declare a modell
+  fit <-  dr4pl::dr4pl(resp~conc) # modell
+  fit %>%
+    print() # modell summary
+
+    # plotten des Fits
+
+  plot(fit,        
+    text.x = "Konzentration", # das hier soll noch personalisierbar werde
+    text.y = "Antwort",       # das hier auch 
+    indices.outliner = fit$idx.outliner) # outliner einplotten
+}
+```
+```{r}
+GroWi.1 <- tibble( # Ein Datensatz von GroWi aus dem WUB-Praktikum
+                Dose =  c(22.37, 194, 93, 164, 172, 50, 295, 119, 141),
+                Response = c(100, 12.5, 100, 62.5, 50, 100, 12.5, 75, 62 )
+)
+dose_response_plot(GroWi.1$Dose, GroWi.1$Response)
+```
+
+Dieses Verfahren kann auch bei der Auswertung von ELISA-Assays eingesetzt werden.
+
+### Ausblick 
+
+Die Optimierung für ELISA's ist hierbei geplant.
+Dafür werden jedoch noch realistische Datensätze benötigt, dazu wird Kontakt zu Walter Wörner [woerner@beuth-hochschule.de] aufgebaut 
+
+## Zellvitalität
+
+```{r, include = FALSE}
+CellVit <- function(unstained, stained){
+    print(
+          (unstained / (unstained + stained)) * 100
+          )
+}
+MultiRate <- function(unstained_defro, unstained_24h){
+    print(
+          (unstained_24h/unstained_defro) * 100
+    )
+}
+yield <- function(unstained_24h, unstained_prefro){
+    print(
+          (unstained_24h/unstained_prefro) * 100
+    ) 
+}
+vitality <- function(stained, unstained){
+    print(
+          (unstained/stained) * 100
+    )
+}
+vitrate <- function(unstained_prefro, unstained_defro){
+    print(
+          (unstained_defro/unstained_prefro)*100
+    )
+}
+```
+
+In der Zellkultur wird häufig die Vitalität von Zellen vor & nach einem Schritt im Arbeitsablauf bestimmt, es handelt sich bei den entsprechenden Rechnungen zwar immer um verhältnismäßig simple Verfahren, jedoch kann es oft hilfreich sein, diese als Funktion zugänglich zu machen:
+
+\begin{equation}
+		\text{Angehrate}=\frac{ \text{LZZ nach 24h}}{\text{LZZ nach Auftauen} }\cdot 100 \%
+\end{equation}
+
+\begin{equation}
+		\text{Ausbeute}=\frac{\text{LZZ nach 24h}}{\text{LZZ vor Einfrieren}} \cdot 100 \%
+\end{equation}
+
+\begin{equation}
+		\text{Vitalität}=\frac{ \text{lebendigeZellen}}{\text{tote Zellen}}\cdot 100 \%
+\end{equation}
+
+\begin{equation}
+		\text{Vitalitätsrate}=\frac{LZZ \text{nach Auftauen}}{LZZ \text{vor Einfrieren}}\cdot 100 \%
+\end{equation}
+Hierbei haben die Funktionen abhängig vom errechneten Wert unterschiedliche Argumente :
+
+
+
+```{r}
+ # Simmulation einer normalverteileten Zellzählung
+LZZ.1 <- rnorm(10, 100, 10)
+ # Simmulation der 2. Normalverteilten ZZ
+LZZ.2 <- rnorm(10, 40, 15)
+# Zusammenfassen zu einem tibble
+Table.vit <- tibble(LZZ.1, LZZ.2) 
+Table.vit %>%
+  # Anfügen einer Spalte mit der Vitalitätsrate
+    mutate(CellVit(LZZ.1, LZZ.2))%>% 
+  # Ausgabe einer schönen Tabelle
+    pander() 
+Table.vit %>%
+    boxplot()
+```
+
+Die anderen Funktionen sind gleich aufgebaut.
+
+## Konzentrationsberechnungen
+
+Auch wenn der Verdünnungsfaktor, als Beispiel, keine anspruchsvolle Berechnung darstellt, macht es Sinn auch Funktionen für die leichteren Dinge im Labor einzuführen weil:
+
+* die Arbeit auch durch kleine Erleichterungen wenifger wird
+* Tippfehler (auch auf dem Taschenrechner!) vorkommen
+* die Auswertung flüssiger abläuft
+* sich die Studenten an die R-Syntax gewöhnen
+```{r include=FALSE}
+# Dilution factor
+dilfact <- function (vol.1, vol.2) {
+    (vol.1/vol.2) %>%
+        print()
+}
+
+# sample volume
+samp.vol <- function (conc.aim, vol.aim = 1, conc.is) {
+   ( (conc.aim * vol.aim) / conc.is) %>%
+        print()
+}
+
+# concentration after dilution
+conc.per.dil <- function (vol.pre , vol.post, conc.pre) {
+    ((conc.pre * vol.pre) / vol.post) %>%
+        print()
+}
+
+```
+
+Als einfaches Beispiel möchten wir $100 \, ml$ einer $100 \, mM$ Lösung eines Salzes herstellen aber verfügen über eine $1\ M$ Stammlösung:
+```{r}
+samp.vol(conc.aim = .1, vol.aim = .1, conc.is = 1)
+```
+
+Die Funktion schlägt also ein Vorlage-Volumen von $0.01\ l$ vor, also $10 \ ml$, wir können nun mit einer weiteren Funktion berechnen, welcher Verdünnung das entspricht: 
+```{r}
+conc.per.dil(vol.pre = .01, vol.post = .1, conc.pre = 1)
+```
+Wobei dise Verdünnung nun als Verdünnungsfaktor ausgedrückt:
+```{r}
+dilfact(vol.1 = .01, vol.2 = .1)
+```
+
+## Aktivitätsbestimmung eines Enzyms
+
+Zur Aktivitätsbestimmung wird das Lambert-Beersche Gesetz angewandt:
+\begin{equation}
+A = \log \left(\frac {\Phi _{0}}{\Phi _{1}}\right) = \varepsilon \cdot c \cdot d 
+\end{equation}
+
+Es bedarf allerdings noch ein paar Umformungen bis wir es auf unsere Probleme anwenden können:
+
+\begin{align}
+Vol.Akt. \left[ \frac{U}{ml} \right] = \frac{V_{total} \cdot F_{dilution}\cdot\Delta E /min}{\varepsilon \left[ \frac{ml}{cm\ \mu mol} \right]\cdot V_{testsolution} \cdot d  }
+\label{LamBEer}
+\end{align}
+
+Hierbei ist $\varepsilon$ der Extinktionskoeffizient, $\Delta E$ die Extinktionsänderung gegen die Zeit, $V_{testsolution}$ das Volumen an Testlösung sowie $F_{dilution}$ der Verdünnungfaktor und das Gesamtvolumen $V_{total}$. 
+Die Schichtdicke der Küvette wird durch $d$ beschrieben.
+Die Formel \ref{LamBEer} findet sich als vol.act() in Biotech:
+```{r, include=FALSE}
+vol.act <- function (vol.tot =1 , dfac = 1, delta.E, 
+                     vol.test, epsilon, cuvette = 1 ){
+
+    (( vol.tot * dfac * delta.E ) / ( epsilon * cuvette * vol.test )) %>%
+        print()                                                         
+                                                                        
+}                    
+```
+
+```{r}
+vol.act(vol.tot = 1, dfac = 1, delta.E = .0456, 
+        vol.test = .5, epsilon = 1, cuvette = 1)  
+```
+
+
+# Bibliografie
+

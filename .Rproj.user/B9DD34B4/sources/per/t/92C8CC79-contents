@@ -1,0 +1,20 @@
+#' Computing a dilution factor, a sample volume (Vorlagevolumen), concentration after dilution
+
+
+# Dilution factor
+dilfact <- function (vol.1, vol.2) {
+    (vol.1/vol.2) %>%
+        print()
+}
+
+# sample volume
+samp.vol <- function (conc.aim, vol.aim = 1, conc.is) {
+   ( (conc.aim * vol.aim) / conc.is) %>%
+        print()
+}
+
+# concentration after dilution
+conc.per.dil <- function (vol.pre , vol.post, conc.pre) {
+    ((conc.pre * vol.pre) / vol.post) %>%
+        print()
+}

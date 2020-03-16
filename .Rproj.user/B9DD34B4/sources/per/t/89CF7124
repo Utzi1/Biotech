@@ -1,0 +1,27 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1582923525929.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3895521149",
+    "id" : "89CF7124",
+    "lastKnownWriteTime" : 1582923623,
+    "last_content_update" : 1582924142328,
+    "path" : "~/Downloads/RWKM_URieger_Protokoll.Rmd",
+    "project_path" : null,
+    "properties" : {
+        "cursorPosition" : "176,36",
+        "last_setup_crc32" : "5A43995C9708d8fa",
+        "marks" : "<:12,0\n>:12,0",
+        "scrollLine" : "167"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

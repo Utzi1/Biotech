@@ -1,0 +1,319 @@
+---
+title: "Protokoll zm Versuch Rührwerkskugelmühle"
+author: "U. Rieger"
+date: "16 6 2019"
+output:
+  pdf_document:
+    keep_tex: yes
+    number_sections: yes
+    toc: yes
+  html_document:
+    df_print: paged
+    toc: yes
+bibliography: RWKM.bib
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(pander)
+library(tidyverse)
+library(outliers)
+library(bookdown)
+```
+# Einführung
+
+Die Rührwerkskugelmühle dient in der Aufarbeitungstechnik zum Aufschließen der Mikroorganismen aus einer Fermentationsbrühe bei intrazellulären Produkten genutzt [@doi:10.1002/btpr.5420030107] .
+Hierbei ist sie auch, im Gegensatz zum Hochdruckhomogenisator, in der Lage filamentöse Strukturen aufzuschließen.
+Der Aufschluss ersten Grades erfolgt durch Scherung der Zellen zwischen den Mahlkörpern, im Praktikum werden Glasperlen eingestezt.
+Die Verwendung von Glasperlen hat sich in der Biotechnologie insofern bewährt, dass es sich um ein billiges, zuverlässiges, bleifreies Materie handelt welches für die meisten Produkte keine Gefahr darstellt. 
+Sollen Produkte gewonnen werden, welche selbst bei Glas Schaden erleiden können müssen nicht nur andere Mahlkörper verwendet werden sondern meistens auch andere Materialien für die Rührwelle, für die Rührscheiben und die Innenwand der Mühle.
+Ein weiterer großer Vorteil besteht darin, dass die Mühle während dem Zellaufschluss gekühlt werden kann. 
+Sollte nach dem ersten Mahlgang noch keine ausreichender Aufschluss gelungen sein so kann das Homogenat durch passagieren noch weiter aufgeschlossen werden.
+Ein Nachteil der **R**ühr**w**erks**k**ugel**m**ühle (**RWKM**) ist die Größe der durch den Aufschluss resultierenden Partikel.
+Diese sind teilweise so klein, dass ohne weitere Hilfsmittel eine Abtrennung der Zellwandtrümmer im technischen Maßstab kaum noch möglich ist. 
+Eine elegante Methode zur Entfernung solcher Trümmer ist die Anwendung eines zwei-Phasen-Systems oder Flockulation.
+Beide Methoden vergrößern die Partikel- bzw. Tropfengröße um eine effizientere Trennung der Bestandteile zu ermöglichen, mathematisch kann dieser Zusammenhang mit dem Stoke'schen Gesetz beschrieben werden.
+Im Praktikum soll unter Verwendung einer RWKM *Saccharomyces cervisiae* aufgeschlossen werden. 
+Über die Fumarase-Aktivität und den Gesamtproteingehalt wird der Aufschluss mitverfolgt und die Aufschlusskonstante $k$ ermittelt.
+Die Rührwerkskugelmühle findet mittlerweile auch in Molkereien ein neues Einsatzgebiet [@GECIOVA2002541].
+Auch die weite Größenverteilung der gemahlenen Partikel ist mit modernen Mühlen reduzierbar, inwiefern dies auf die weitere Aufarbeitung wirkt wird von @VANGAVER1991665 erörtert.
+
+# Zielsetzung
+
+Im Versuch soll die Aufschlusskonstante $k$ für eine bestimmte Drehzahl, Flussrate, Mahlgut, Mikroorganismus mit der Rührwerkskugelmühle ermittelt werden.
+Der ermittelte Wert für $k$ ist nur für einen Aufschluss bei äquivalenten Parametern gültig [@PMID:1368088]
+
+# Materialien und Mehoden
+## Flowchart 
+![Flowchart zum Versuch](Flowchart/Flowchart_RKWM.pdf)
+
+## Formeln
+
+Die Aufschlusskonstante $k$ ist definiert durch: 
+
+\begin{align}
+\frac{d\ R}{d \ t}=-k \cdot R
+\end{align}
+
+mit: 
+
+* $R$ Produktkonzentration
+* $k$ Aufschlusskonstante in $min^{-1}$
+* $\frac{d R}{d t}$ Reaktionsgeschwindgkeit der Produktfreisetztung
+
+
+Diese Gleichung kann umgeformt werden zu: 
+
+\begin{align}
+ln \ \frac{Rm}{Rm - R}=k \cdot t
+\end{align}
+
+Hierbei wird $Rm$ als maximal freisetzbare Produktkonzentration eingeführt.
+Im Falle einer grafischen Auftragung entspricht die Steigung dann der Konstante $k$.
+Sobald sich das Fluid nicht mehr in der RKWM befindet wird nun anstatt $t$ die Anzahl der Passagen $N$ verwendet:
+
+\begin{align}
+ln \ \frac{Rm}{Rm - R}=k \cdot N
+\end{align}
+
+Hierbei ist $N$ definiert als:
+
+
+
+\begin{align}
+  N = \frac{\dot{V}}{V_{tot}} \cdot t
+\end{align}
+
+* $V_{tot}$ Ausgangsvolumen
+* $\dot{V}$ Volumenstrom
+
+Mit $N$ als Passagen wird $k$ dimensionslos.
+Die Volumenaktivität der Fumarase wird berechnet nach:
+
+
+\begin{align}
+Vol.Akt. \left[ \frac{U}{ml} \right] = \frac{V_{total} \cdot F_{dilution}\cdot\Delta E /min}{\varepsilon \left[ \frac{ml}{cm\ \mu mol} \right]\cdot V_{testsolution} \cdot d  }
+\end{align}
+
+Hierbei ist $\varepsilon$ der Extinktionskoeffizient, $\Delta E$ die Extinktionsänderung gegen die Zeit, $V_{testsolution}$ das Volumen an Testlösung sowie $F_{dilution}$ der Verdünnungfaktor und das Gesamtvolumen $V_{total}$. 
+Die Schichtdicke der Küvette wird durch $d$ beschrieben.
+Zur Berechnung des Gesamtprotein wird über ein lineare Regression und die daraus resultierende Eichgerade eine Gleichung definiert. 
+Unter Berücksichtigung des Verdünnungsfaktor kann dann die Gesamtproteinaktivit nachvollzogen werden, hierfür gilt:
+\begin{align}
+\beta \left[ \frac{mg}{ml} \right] =  \frac{\mu g \cdot F_V 1000 \frac{\mu l}{ml}}{V_{Probe}\cdot 1000 \frac{\mu g}{mg}} 
+\end{align}
+
+
+# Auswertung 
+
+## Errechnung der Passagenzahl
+
+Es wurden in jeder Probennahme $15 \ ml$ an Suspension aus dem Pool aus Homogenat und bereits aufgeschlossener Suspension genommen, insgesamt erfolgten 13 Probennahmen über 90 Minuten. 
+Der Volumenstrom $\dot{V}$ konnte auf exakte $10 \ \frac{l}{h}$ eingestellt werden. 
+Um nun den Wert einer Passage zu einem definierten Zeitpunkt $t$ ermitteln zu können wird die bereits aufgeführte Formel 4 verwendet.
+Das exakte Volumen wurde durch die Zugabe der Laugen und dem Abzug des Volumens an Probe errechnet:
+
+```{r echo=FALSE}
+
+zeit <- c(0,1,2,5,7.5,10,15,20,30,45,60,75,90)
+i <- c( 4000+0
+, 3985+0
+, 3970+0
+, 3955+5
+, 3940+5+42
+, 3925+5+42+0
+, 3910+5+42+0+0
+, 3895+5+42+0+0+23
+, 3880+5+42+0+0+23+30
+, 3865+5+42+0+0+23+30+36
+, 3850+5+42+0+0+23+30+36+46
+, 3835+5+42+0+0+23+30+36+46+26
+, 3820+5+42+0+0+23+30+36+46+26)
+N <- ((10000/i)*(zeit/60))
+pander(tibble("Zeit"=zeit, "Volumen in ml"=(i) ,"Passagen"=N ))
+```
+
+## Rohdaten
+
+### Bradford-Assay und Fumaraseaktivität
+
+Zur Quantifizierung an Gesamtprotein wurde der Gesamtproteingehalt nach Bradford durchgeführt, dieser wurde durch eine zusätzliche Fumaraseaktivitätsbestimmung ergänzt, diese wurde jedoch nicht von der Praktikumsleitung gefordert und wird später noch kritisch betrachtet.
+
+
+```{r include=FALSE}
+Std <-  seq(0,100,20)
+Abs <- c(.374,.5,.617,.78,.874,.985)
+zeit <- c(0,1,2,5,7.5,10,15,20,30,45,60,75,90)
+FV <- c(20,20,20,20,20,20,20,20,20,50,50,50,50)
+Absorbtion <- c(.346 , .384 , .501 , .603 , .607 , .725 , .7153 , .801 , 1.018 , .689 , .721 , .753 , .740)
+Aktivit <- c(0 ,.26 , 1.07 , 1.619 , 3 , 2.3 , 3.26 , 7.22 , 15.75 , 11.3 , 10.52 , 9.98 , 12.36)
+i <- 4000
+while (i > 3820) {print(i) ; i = i- 15}
+(N <- ((10000/i)*(zeit/60)))
+zeit <- c(0,1,2,5,7.5,10,15,20,30,45,60,75,90)
+Leitf <- c(11.2,11.2,11.4,11.7,11.7,12.3,12.5,12.8,13.6,13.8,14.3,15.1,17.8)
+Temp <- c(22,20.5,20.5,21,22,22,23,22,23,22,22,22,22)
+ph <- c(7.02,6.91,6.8,6.59,6.64,7.35,6.92,6.68,6.57,6.46,6.47,6.55,7.46)
+KOH <- c(0,0,0,5,42,0,0,23,30,36,46,0,0)
+NaOH <- c(0,0,0,0,0,0,0,0,0,0,0,26,0)
+length(FV)
+length(Absorbtion)
+length(Aktivit)
+length(Leitf)
+length(Temp)
+length(NaOH)
+length(KOH)
+length(ph)
+```
+```{r echo=FALSE}
+pander(tibble( "Zeit"=zeit, "Passagen"=N , "Absorption Bradfordassay"=Absorbtion , "FV Bradford"=FV , "Fumaraseaktivitaet"=Aktivit))
+```
+
+Die für den Bradfordassay benötigte Eichgerade wurde aus den hier aufgeführten Werten errechnet:
+Std <-  seq(0,100,20)
+Abs <- c(.374,.5,.617,.78,.874,.985)
+```{r}
+Std <-  seq(0,100,20)
+Abs <- c(.374,.5,.617,.78,.874,.985)
+pander(tibble("Konzentration"=Std , "gemessene Absorption"=Abs))
+```
+
+### Prozessparameter
+
+Während des gesamten Versuchs wurden die Temperaturen, $pH$-Werte sowie die Leitfähigkeit des Durchlaufs der RWKM überwacht.
+Nach Bedarf wurde dann der pH-Wert wieder angepasst.
+Bis zum Zeitpunkt $t=60$ wurde eine  $1 M\ KOH$-Lösung verwendet, diese wurde jedoch ab $t=75$ durch eine $20\%$-ige $NaOH$-Lösung ersetzt.
+Dies geschah auf anraten der Praktikumsleitung.
+
+
+```{r echo=FALSE}
+parameter <- tibble("Zeit"=zeit,"pH-Wert"=ph , "Leitfaehigkeit in $mS/cm$"=Leitf , "Temperatur in $°C$"=Temp , "NaOH in ml"=NaOH , "KOH in ml"=KOH)
+ pander(parameter)
+```
+```{r echo=FALSE}
+ggplot(mapping = aes(y=Leitf/2, x=zeit))+
+  geom_line(color="green")+
+  geom_line(mapping = aes(zeit , ph) , color = "blue")+
+  geom_line(mapping = aes(zeit,Temp/2.4))+
+  ylab("2*Leitf., pH, 2,4*Temp.")+
+  xlab("Zeit")
+  
+```
+
+## Bestimmung des $k$-Wertes aus dem Gesamtproteingehalt
+
+Die Eichgerade wurde für den Bradfordassay nach den Angaben im Skript zum Praktikum ermittelt.
+Mit den gemessenen Werten kann nun eine lineare Regression durchgeführt werden, hierbei gilt die allgemeine Gleichung:
+$$f(x)=m\cdot x +b$$
+```{r include=FALSE}
+(sum <- (summary(lm(Abs~Std))))
+```
+Durch die Regression wird eine Steigung von $m=0,0062000$ und ein y-Achsenschnittpunkt von $0,3783333$ ermittelt. 
+Das Bestimmtheitsmaß $R^2$ beträgt $0,9957$
+
+```{r echo=FALSE}
+ggplot()+
+  geom_point(mapping = aes(Std,Abs))+
+  geom_smooth(mapping = aes(Std,Abs), method = "lm")+
+  xlab("Absorption")+
+  ylab("Konzentration")+
+  geom_abline(slope = 0.0062000 , intercept = 0.3783333 )  
+```
+
+Über die ermittelten Eichgerade lassen sich nun unter Berücksichtigung der Verdünnungsfaktoren für die gemessenen Absorptionswerte reale Proteinkonzentrationen (Gleichung 6) ermitteln.
+Nun kann mit Gleichung 3 eine Umformung zur Ermittlung von $k$ stattfinden, die erhaltenen Werte werden sodann zur Bestimmung von $k$ wieder einer linearen Regressionsanalyse unterzogen.
+Als maximal freisetzbare Proteinkonzentration konnte im Versuch der Wert $30.24\ \frac{mg}{ml}$ ermittelt werden, dieser entspricht dem Wert für $Rm$.
+
+```{r echo=FALSE}
+Konzentration <- c( 0, 0.2880  ,4.0320 , 7.2960 , 7.4240 , 11.2000 , 10.8896 , 13.6320 , 20.5760 ,25.12 , 27.68 , 30.24 , 29.20 )
+pander(tibble( "Zeit"=zeit, "Passagen"=N , Konzentration))
+```
+
+```{r echo=FALSE}
+y <- (log(30/(30- Konzentration )))
+ggplot()+
+  geom_point(mapping = aes( N , y ))+
+  geom_smooth(mapping = aes( N , y ),method = "lm")+
+  xlab("Passagen")+
+  ylab("ln(Rm/(Rm-R))")
+```
+```{r include=FALSE}
+summary(lm(N~y))
+```
+
+Der hierbei errechnete Wert für $k$ beträgt $1.06284$ mit einer Bestimmtheit von $R^2= 0,9932$.
+
+##  Bestimmung des $k$-Wertes aus der Fumaraseaktivität 
+
+Ähnlich wie bei der Gesamtproteinkonzentration kann auch aus der Fumaraseaktivität durch umformen zu Gleichung  3 des Zusammenhangs welcher von Gleichung 1 beschrieben wird ein Wert für $k$ durch eine lineare Regressionsanalyse ermittelt werden.
+Vorab ist eine Auftragung der Messwerte gegen die Zeit für das spätere Verständnis der Werte hilfreich.
+
+```{r echo=FALSE}
+ggplot(mapping = aes(zeit,Aktivit))+
+  geom_point()+
+  geom_line(mapping = aes(zeit[1:8],Aktivit[1:8]), color="green",alpha=.5)+
+  geom_line(mapping = aes(zeit[8:13],Aktivit[8:13]), color="red",alpha=.5)+
+  ylab("Fum.Akt.")+
+  xlab("Zeit")
+```
+
+Der Plot verdeutlicht, dass nicht alle Werte sinnvoll zu einer Regression passen, ab der Messung zum Zeitpunkt $t=20$ werden die Messwerte unzuverlässig.
+Deswegen wird in diesem Abschnitt eine Auswertung der ersten 8 Messwerte durchgeführt.
+Eine grafische Auftragung unter den bereits genannten Prämissen lässt und folgende Darstellung plotten:
+```{r include=FALSE}
+Aktivit <- c(0 ,.26 , 1.07 , 1.619 , 3 , 2.3 , 3.26 , 7.22 , 15.75 , 11.3 , 10.52 , 9.98 , 12.36)
+length(Aktivit)
+pander(tibble(Aktivit,N))
+(N)
+y<-((max(Aktivit) / ( max(Aktivit)-Aktivit )))
+
+N1 <- N[1:8]
+y1 <- y[1:8]
+N2 <- N[10:13]
+y2 <- y[10:13]
+
+(reg1 <- summary(lm( y1 ~ N1 )))
+(reg2 <- summary(lm(  y2  ~  N2  )))
+reg1
+```
+![](Rplot02.jpeg)
+
+In diesem Zeitraum kann eine Aufschlusskonstante von $k=1,39287$ ermittelt werden, für die Regression dieses Datensatzes ergibt sich zusätzlich ein Bestimmtheitsmaß von $R^2=0,8217$. 
+Auffällig ist eine Y-Achsen-Verschiebung von $0.95687$, diese wird später noch genauer diskutiert.
+Im Fall eines Vergleichs der zuvor ausgeschlossenen Messwerte durch eine Regressionsanalyse mit den bereits  untersuchten Messwerten kann die Abweichung der Messreihe in sich selbst veranschaulicht werden:
+!["In diesem Plot wird die blaue Regressionsgerade zu $k=1,39287$ mit den ausgeschlossenen Werten zusammen dargestellt, auch für diese Werte wurde in rot eine Regressionsgerade ermittelt, zusätzlich ist in grau die Abweichung visualisiert"](Rplot04.jpeg)
+
+# Diskussion 
+
+Für den Versuch wurde zu Beginn ausschließlich die Untersuchung Gesamtproteinkonzentration verlangt, auf Rücksprache wurde zusätzlich auch die Fumaraseaktivität untersucht.
+Dies erwies sich als ungünstig.
+Der Aufschluss erfolgte bei Raumtemperatur, ca. 27°C, durch konstantes Kühlen der Mühle mir Wasser konnte jedoch währen des Mahlens, also dem Zellaufschluss die Temperatur unter 24°C gehalten werden.
+Das nachstellen des $pH$-Wertes erfolgte zu Beginn mit Kalilauge, diese erwies sich aber als fehlerhaft, auch nach gehäufter Zugabe großer Volumina, insgesamt $182 \ ml$ konnte der $pH$-Wert nicht auf das gewünschte Niveau gebracht werden.
+Der Median der Messwerte liegt bei $pH=6,68$, fast eine $pH$-Einheit von der im Skript gemacht Vorgabe von $pH=7,5$ entfernt.
+Die Leitfähigkeit verhält sich wie zu erwarten war, sie steigt stetig.
+Aus diesem Grund wurde zur letzten $pH$-Korrektur eine $20\%$-ige Natriumhydroxidlösung eingesetzt, diese ermöglichte eine $pH$-Korrektur auf $7,65$.
+Die Probenanalytik zur Gesamtproteinbestimmung nach Bradford lieferte gut auswertbare Ergebnisse, lediglich die beiden letzten Messwerte sind partiell fehlerbehaftet, der Vorletzte Messwert nimmt einen höheren Wert als der letzte an, dieser Umstand ergibt nur wenig Sinn, im Fall eines $100\%$-Aufschlusses müssten die Werte annähernd gleich sein, dies ist jedoch auch nicht gegeben.
+Trotz dieser Unstimmigkeit kann eine sehr genaue Regression durchgeführt werden. 
+Die Messung der Fumaraseaktivität ist zu beginn noch nachvollziehbar, gegen später jedoch werden die Messwerte surreal, die Grafische Auftragung der gesamten Wertereihe in Kombination mit den jeweiligen Regressionsgerade kann diesen Umstand wiedergeben. 
+Der Bereich zu Beginn der Messreihe kann zwar eine lineare Regression mit einem akzeptablen $R^2$ liefern jedoch scheinen die Werte im Anschluss eher ein Produkt aus Messfehelern und Fehlern bei der Durchführung der Analytik zu sein. 
+Dass der Zellaufschluss gemäß den bekannten Gesetzten der Natur erfolgte ist durch die andere Angewandte Methode nahe liegend.
+Inwiefern durch falsches Handling in der Durchführung der Analytik Fehler gemacht wurden, lässt sich schlecht nachvollziehen jedoch scheint diese Fehlerquelle am plausibelsten. 
+Im Gespräch mit Herrn Luther stellte sich heraus, dass auch in früheren Durchführungen des Versuchs die zu Beginn der Messung ermittelten Fumarasewerte eine robuste Ermittlung des $k$-Wertes erlaubten.
+
+# Ergebiss
+
+Eine abschließende Betrachtung der dargestellten Auswertung legt nahe, dass die Messung für die Fumaraseaktivität auf Grund von Fehlern, welche wahrscheinlich in der Analytik gemacht wurden, verworfen werden kann, auch wenn die zu Beginn gemessenen Werte sinnvoll erscheinen.
+Die Messung der Gesamtproteinkonzentration liefert mit einem guten Bestimmtheitsmaß $R^2$ von 
+$0,9932$ als Wert für die Aufschlusskonstante $k=1,06284$, dieser Wert wurde auch in früheren Praktika ermittelt.
+
+
+
+
+# Quellenverzeichnis 
+
+
+
+
+
+
+

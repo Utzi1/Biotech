@@ -1,0 +1,19 @@
+Package: Biotech
+Title: Diverse applications for Biotech
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Utz",
+           family = "Rieger",
+           role = c("aut", "cre"),
+           email = "lovis.rieger@me.com",
+           comment = structure("YOUR-ORCID-ID", .Names = "ORCID"))
+Description: Software for Biotec-students
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Suggests: 
+    testthat
+RoxygenNote: 7.0.2
+Imports: 
+    ggplot2,
+    magrittr
