@@ -17,5 +17,7 @@ conc_eval(abs_P, abs_std, conc_std)
 float
 }
 \description{
-concentration evaluation
+Hiermit kannst du die Ergebnisse deiner Standardreihe (Absorptionsmessung jeder Art) plotten, bewerten und
+die Konzentration deiner unbekannten Probe bestimmen.
+Verdünnungsfaktoren sind noch kein Bestandteil der Funktionen
 }

@@ -15,7 +15,7 @@ vol.act(vol.tot = 1, dfac = 1, delta.E, vol.test, epsilon, cuvette = 1)
 
 \item{vol.test}{test volume (without default)}
 
-\item{epsilon}{Molar attenuation coefficient (without default)}
+\item{epsilon}{molar attenuation coefficient (without default)}
 
 \item{cuvette}{cuvette factor or path length, default is 1}
 }

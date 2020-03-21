@@ -4,16 +4,24 @@
 \alias{plot_MM_direct}
 \title{Create a non-linear Regression for a Michaelis-Menten type Enzyme with a little knowlege of its Km and Vmax}
 \usage{
-plot_MM_direct(sub, velo)
+plot_MM_direct(
+  sub,
+  velo,
+  title = "title",
+  xlab = "abscisaa",
+  ylab = "ordinate"
+)
 }
 \arguments{
-\item{sub}{list}
+\item{sub}{substrate concentration}
 
-\item{vel}{list}
+\item{title}{title of the plot}
 
-\item{V_max_start}{float}
+\item{xlab}{lable of the abscissa}
 
-\item{K_m_start}{float}
+\item{ylab}{lable of the ordinate}
+
+\item{vel}{enzymatic velocity}
 }
 \description{
 Create a non-linear Regression for a Michaelis-Menten type Enzyme with a little knowlege of its Km and Vmax

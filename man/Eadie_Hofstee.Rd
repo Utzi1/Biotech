@@ -9,7 +9,8 @@ Eadie_Hofstee(
   sub,
   titleEDH = "Eadie-Hostee-Plot",
   xlable = "vel/sub",
-  ylable = "sub"
+  ylable = "sub",
+  printfigure = F
 )
 }
 \arguments{
