@@ -10,16 +10,18 @@ CellVit(unstained, stained)
 \item{unstained}{cell count of unstained cells}
 
 \item{stained}{cell count of stained cells}
-
-\item{unstained_prefro}{in adavance of frosting}
-
-\item{unstained_defro}{after frosting}
-
-\item{unstained_24h}{24h after defrosting (and cultivation)}
 }
 \value{
 vitality
 }
 \description{
 Compute the cell vitality
+}
+\examples{
+# we use a real dataset:
+us <- c(55, 65, 49, 57)
+st <- c(11, 12, 9, 6)
+
+CellVit(unstained = us, stained = st)
+
 }

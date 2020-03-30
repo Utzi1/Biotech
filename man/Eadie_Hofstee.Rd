@@ -10,7 +10,7 @@ Eadie_Hofstee(
   titleEDH = "Eadie-Hostee-Plot",
   xlable = "vel/sub",
   ylable = "sub",
-  printfigure = F
+  printfigure = TRUE
 )
 }
 \arguments{
@@ -24,6 +24,19 @@ Eadie_Hofstee(
 
 \item{ylable}{lable of the ordinate}
 }
+\value{
+a Plot, the model itself and a summary of the model
+}
 \description{
 Draw an Eadie-Hofstee graph (and compute the y-axis intercept)
+}
+\examples{
+# simulate values
+sub <-seq(1,20,1)
+vel <-((runif(1,14.7,15)*sub)/(runif(1,2.5,3)+sub))+rnorm(20,0,.3)
+# plot them
+Eadie_Hofstee(vel = vel, sub = sub)
+
+
+
 }

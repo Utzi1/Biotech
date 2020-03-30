@@ -2,10 +2,23 @@
 % Please edit documentation in R/dilfact.R
 \name{dilfact}
 \alias{dilfact}
-\title{Computing a dilution factor, a sample volume (Vorlagevolumen), concentration after dilution}
+\title{Computing a dilution factor, a sample volume (Vorlagevolumen), concentration after dilution
+Compute the dilution factor}
 \usage{
 dilfact(vol.1, vol.2)
 }
+\arguments{
+\item{vol.1}{V1 use same metrics}
+
+\item{vol.2}{V2 use same metrics}
+}
+\value{
+FV a dilution factor
+}
 \description{
 Computing a dilution factor, a sample volume (Vorlagevolumen), concentration after dilution
+Compute the dilution factor
+}
+\examples{
+dilfact(1, 100)
 }

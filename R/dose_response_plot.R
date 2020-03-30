@@ -4,17 +4,14 @@
 #' @param resp the response of the system for conc
 #' @param xlab lable for the abscissa
 #' @param ylab lable for the ordinate
-#'
+#' @export
 
 dose_response_plot <- function (conc, resp, xlab = "conc", ylab = "resp") {
-    # declare a modell
-    fit <-  dr4pl::dr4pl(resp~conc) # modell
-    # plotten des Fits
-
-    plt  <- plot(fit,
-                text.x = xlab , # das hier soll noch personalisierbar werde
-                text.y = ylab ,       # das hier auch
-                indices.outliner = fit$idx.outliner) # outliner einplotten
+    fit <-  dr4pl::dr4pl(resp~conc)
+    plt  <- base::plot(fit,
+                text.x = xlab , 
+                text.y = ylab ,
+                indices.outliner = fit$idx.outliner)
     return(list(fit, plt))
 }
 

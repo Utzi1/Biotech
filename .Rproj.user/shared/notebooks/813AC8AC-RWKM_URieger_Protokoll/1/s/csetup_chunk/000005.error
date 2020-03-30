@@ -1,1 +1,0 @@
-{"frames":[{"character_number":0,"end_character_number":0,"end_line_number":0,"file":"","func":"library(bookdown)","line_number":0},{"character_number":0,"end_character_number":0,"end_line_number":0,"file":"","func":"stop(txt, domain = NA)","line_number":0}],"message":"Fehler in library(bookdown) : es gibt kein Paket namens ‘bookdown’\n"}

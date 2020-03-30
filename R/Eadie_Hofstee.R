@@ -6,9 +6,21 @@
 #' @param xlable lable of the abscissa
 #' @param ylable lable of the ordinate
 #'
+#' @return a Plot, the model itself and a summary of the model
+#' @export
+#'
+#' @examples
+#' # simulate values
+#' sub <-seq(1,20,1)
+#' vel <-((runif(1,14.7,15)*sub)/(runif(1,2.5,3)+sub))+rnorm(20,0,.3)
+#' # plot them
+#' Eadie_Hofstee(vel = vel, sub = sub)
+#'
+#'
+#'
 Eadie_Hofstee <- function(vel, sub, titleEDH = "Eadie-Hostee-Plot",
                           xlable = "vel/sub", ylable = "sub",
-                          printfigure=F){
+                          printfigure = TRUE ){
   EHPlot <-   ggplot2::ggplot(mapping = ggplot2::aes(
     x = vel/sub,
     y = vel)
