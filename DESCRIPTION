@@ -1,13 +1,13 @@
 Package: Biotech
-Title: Diverse applications for Biotech
-Version: 0.0.0.9000
+Title: Diverse applications for Biotechnologies
+Version: 0.0.0.9001
 Authors@R: 
     person(given = "Utz",
            family = "Rieger",
            role = c("aut", "cre"),
            email = "lovis.rieger@me.com",
            comment = structure("YOUR-ORCID-ID", .Names = "ORCID"))
-Description: Software for Biotec-students
+Description: Software for Biotechnology students with the aim to popularise the usage of R as great tool for data-handling and manipulation
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
