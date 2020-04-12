@@ -11,7 +11,7 @@ vol.act(vol.tot = 1, dfac = 1, delta.E, vol.test, epsilon, cuvette = 1)
 
 \item{dfac}{dilution factor, default is 1}
 
-\item{delta.E}{Delta E (without default)}
+\item{delta.E}{$\Delta$E (without default)}
 
 \item{vol.test}{test volume (without default)}
 

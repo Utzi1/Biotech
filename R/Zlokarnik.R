@@ -47,14 +47,14 @@ eta = .724
         (log((power / vol.rea) * (1 / (rho * ((eta * gforce) ^ (2 / 3)
         )))))
     y <- ( log( kLa * (vol.rea / vel.gas) ) )
-    model <- lm(y~x)
+    model <- base::lm(y~x)
     return(
         list(
-            Modell = summary(model),
-            ggplot(mapping = aes(x, y))+
-                geom_point()+
-                geom_smooth(method = "lm"),
-            "K und m" = (exp(1)^(coefficients(model)))
+            Modell = base::summary(model),
+            ggplot2::ggplot(mapping = ggplot2::aes(x, y))+
+                ggplot2::geom_point()+
+                ggplot2::geom_smooth(method = "lm"),
+            "K und m" = (exp(1)^(base::coefficients(model)))
         )
     )
 }

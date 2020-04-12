@@ -24,6 +24,8 @@ mix.t.nN(
 
 \item{DR}{diamter of the riser}
 
+\item{a6}{specific coefficient}
+
 \item{AD}{surface area downer}
 
 \item{AR}{surface area riser}

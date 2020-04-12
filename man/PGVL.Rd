@@ -42,7 +42,7 @@ PGVL(
 
 \item{A.Downer}{column cross-section (downer)}
 
-\item{N}{}
+\item{N}{count of gas outlets}
 }
 \value{
 power input
