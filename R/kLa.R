@@ -13,12 +13,11 @@
 #' @param h.undisp.Riser height of the liquid (riser) without gas
 #' @param h.undisp.Downer height of the liquid (downer) without gas
 #' @param A.Downer column cross-section (downer)
-#' @param N
+#' @param N count of gas outlets
 #'
 #' @return power input
 #' @export
 #'
-#' @examples
 PGVL <-
   function(uGr,
            A.Riser = 0.00528,
@@ -47,7 +46,6 @@ PGVL <-
 #' @return gas content upstream column for water
 #' @export
 #'
-#' @examples
 eGR_H2O <- function( K1,
                      uGr,
                      m1) {
@@ -69,7 +67,6 @@ eGR_H2O <- function( K1,
 #' @return  eGR gas content upstream column for non nowton fluids
 #' @export
 #'
-#' @examples
 eGR_CMC <- function( K2 = .465,
                      a2 = .65,
                      b2 = -1.06,
@@ -102,7 +99,6 @@ eGR_CMC <- function( K2 = .465,
 #' @return
 #' @export
 #'
-#' @examples
 kLaD.korr.nN <-
   function(K4 = (.5 * (10 ^ -2)),
            uGr,
@@ -135,7 +131,7 @@ kLaD.korr.nN <-
 #' @return
 #' @export
 #'
-#' @examples
+#'
 kLaD.korr.H2O <- function(K3 = .076,
                           AD, AR,
                           a3 = -2,
@@ -153,7 +149,7 @@ kLaD.korr.H2O <- function(K3 = .076,
 #' @return mixing time of H2O based on korrelation
 #' @export
 #'
-#' @examples
+#'
 mix.t.H2O <- function(K5, uGR, m5) {
   mix.t.H2O <-  K5 * (uGR ^ m5)
   return(mix.t.H2O)
@@ -164,7 +160,7 @@ mix.t.H2O <- function(K5, uGR, m5) {
 #'
 #' @param K6 constant of proportionality
 #' @param DR diamter of the riser
-#' @param a6
+#' @param a6 specific coefficient
 #' @param AD surface area downer
 #' @param AR surface area riser
 #' @param b6 specific coefficient
@@ -178,7 +174,7 @@ mix.t.H2O <- function(K5, uGR, m5) {
 #' @return
 #' @export
 #'
-#' @examples
+#'
 mix.t.nN <-
   function(K6 = 571,
            DR,
@@ -205,7 +201,7 @@ mix.t.nN <-
 #' @return diffusion coefficient
 #' @export
 #'
-#' @examples
+#'
 kLaD <- function(kLa, eGT) {
   kLaD <- kLa*(1-eGT)
   return(kLaD)
@@ -220,7 +216,7 @@ kLaD <- function(kLa, eGT) {
 #' @return dynamic viscosity
 #' @export
 #'
-#' @examples
+#'
 eta.eff <- function(Kc = (.3 ^ .7), uGr, m) {
   eta.eff <- (Kc * (5000 * uGr) ^(m-1))
   return(eta.eff)
