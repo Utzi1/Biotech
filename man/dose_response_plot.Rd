@@ -15,6 +15,9 @@ dose_response_plot(conc, resp, xlab = "conc", ylab = "resp")
 
 \item{ylab}{lable for the ordinate}
 }
+\value{
+a plot
+}
 \description{
 A dose~response plot with a summary
 }

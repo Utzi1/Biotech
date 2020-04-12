@@ -15,13 +15,16 @@ plot_MM_direct(
 \arguments{
 \item{sub}{substrate concentration}
 
+\item{velo}{velocity}
+
 \item{title}{title of the plot}
 
 \item{xlab}{lable of the abscissa}
 
 \item{ylab}{lable of the ordinate}
-
-\item{vel}{enzymatic velocity}
+}
+\value{
+a plot
 }
 \description{
 Create a non-linear Regression for a Michaelis-Menten type Enzyme with a little knowlege of its Km and Vmax

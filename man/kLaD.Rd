@@ -4,7 +4,7 @@
 \alias{kLaD}
 \title{Title}
 \usage{
-kLaD(kLa, eGT)
+kLaD(kLa, eGt)
 }
 \arguments{
 \item{kLa}{kLa}

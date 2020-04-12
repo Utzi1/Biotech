@@ -13,7 +13,7 @@ mix.t.nN(
   b6 = -0.16,
   h.disp.Riser,
   c6 = -1.44,
-  uGr,
+  uGR,
   d6 = -0.46,
   eta.eff,
   e6 = 0.56
@@ -36,7 +36,7 @@ mix.t.nN(
 
 \item{c6}{specific coefficient}
 
-\item{uGr}{superficial velocity (riser)}
+\item{uGR}{superficial velocity (riser)}
 
 \item{d6}{specific coefficient}
 

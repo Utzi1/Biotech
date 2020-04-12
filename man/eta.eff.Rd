@@ -4,12 +4,12 @@
 \alias{eta.eff}
 \title{rheological modeling for highly non-newtonian fluids estimate of Ostwald & de Waele}
 \usage{
-eta.eff(Kc = (0.3^0.7), uGr, m)
+eta.eff(Kc = (0.3^0.7), uGR, m)
 }
 \arguments{
 \item{Kc}{consistency index}
 
-\item{uGr}{superficial velocity (riser)}
+\item{uGR}{superficial velocity (riser)}
 
 \item{m}{index}
 }

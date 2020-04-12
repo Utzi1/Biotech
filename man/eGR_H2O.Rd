@@ -4,12 +4,12 @@
 \alias{eGR_H2O}
 \title{gas content of upstream column for a bubble column reactor}
 \usage{
-eGR_H2O(K1, uGr, m1)
+eGR_H2O(K1, uGR, m1)
 }
 \arguments{
 \item{K1}{specific coefficient}
 
-\item{uGr}{superficial velocity (riser)}
+\item{uGR}{superficial velocity (riser)}
 
 \item{m1}{specific coefficient}
 }

@@ -9,9 +9,9 @@ mix.t.H2O(K5, uGR, m5)
 \arguments{
 \item{K5}{constant of proportionality}
 
-\item{m5}{specific coefficient}
+\item{uGR}{superficial velocity (riser)}
 
-\item{uGr}{superficial velocity (riser)}
+\item{m5}{specific coefficient}
 }
 \value{
 mixing time of H2O based on korrelation

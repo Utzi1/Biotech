@@ -6,7 +6,7 @@
 \usage{
 kLaD.korr.nN(
   K4 = (0.5 * (10^-2)),
-  uGr,
+  uGR,
   a4 = 0.65,
   DGL = (2.7 * 10^(-9)),
   b4 = 0.5,
@@ -24,7 +24,7 @@ kLaD.korr.nN(
 \arguments{
 \item{K4}{constant of proportionality}
 
-\item{uGr}{superficial velocity (riser)}
+\item{uGR}{superficial velocity (riser)}
 
 \item{a4}{specific coefficient}
 

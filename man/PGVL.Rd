@@ -5,7 +5,7 @@
 \title{Power input of a bubble column reactor}
 \usage{
 PGVL(
-  uGr,
+  uGR,
   A.Riser = 0.00528,
   p,
   rho.liq = 997.048,
@@ -20,7 +20,7 @@ PGVL(
 )
 }
 \arguments{
-\item{uGr}{superficial velocity (riser)}
+\item{uGR}{superficial velocity (riser)}
 
 \item{A.Riser}{column cross-section  (riser)}
 

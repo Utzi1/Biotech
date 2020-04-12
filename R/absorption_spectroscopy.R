@@ -8,6 +8,7 @@
 #' @param dfac Dilution-factor of each abs, can be a vector, too
 #'
 #' @return The concentration
+#' @export
 #'
 conc.from.abs <- function (abs, epsilon, cuvette = 1, dfac = 1) {
     concentration <- (abs / ( epsilon * cuvette )) * dfac #%>%

@@ -15,9 +15,9 @@ kLaD.korr.H2O(K3 = 0.076, AD, AR, a3 = -2, uGR, b3 = 0.8)
 
 \item{a3}{specific coefficient}
 
-\item{b3}{specific coefficient}
+\item{uGR}{superficial velocity (riser)}
 
-\item{uGr}{superficial velocity (riser)}
+\item{b3}{specific coefficient}
 }
 \value{
 

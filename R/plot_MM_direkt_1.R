@@ -1,13 +1,14 @@
 #' Create a non-linear Regression for a Michaelis-Menten type Enzyme with a little knowlege of its Km and Vmax
 #'
 #' @param sub substrate concentration
-#' @param vel enzymatic velocity
 #' @param xlab lable of the abscissa
 #' @param ylab lable of the ordinate
 #' @param title title of the plot
+#' @param velo velocity
 #'
-
-
+#' @return a plot
+#' @export
+#'
 plot_MM_direct <- function(sub, velo, title = "title", xlab = "abscisaa", ylab = "ordinate"){
 
     # Fitten des SSmicmen-Modell

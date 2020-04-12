@@ -4,7 +4,7 @@
 \alias{eGR_CMC}
 \title{gas content upstream column for non nowton fluids}
 \usage{
-eGR_CMC(K2 = 0.465, a2 = 0.65, b2 = -1.06, c2 = -0.103, eta.eff, uGr, AD, AR)
+eGR_CMC(K2 = 0.465, a2 = 0.65, b2 = -1.06, c2 = -0.103, eta.eff, uGR, AD, AR)
 }
 \arguments{
 \item{K2}{constant of proportionality}
@@ -17,7 +17,7 @@ eGR_CMC(K2 = 0.465, a2 = 0.65, b2 = -1.06, c2 = -0.103, eta.eff, uGr, AD, AR)
 
 \item{eta.eff}{dynamic viscosity}
 
-\item{uGr}{superficial velocity (riser)}
+\item{uGR}{superficial velocity (riser)}
 
 \item{AD}{surface area downer}
 
