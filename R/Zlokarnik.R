@@ -16,7 +16,6 @@ KV <- c(8.51, 8.52 , 8.54 , 8.57 )
 #' @export
 #'
 #' @examples
-#' PM.mes <- PM( P.perc = percent, rpm = rpm )
 PM <- function (P.perc, rpm, F1 = .107, F2 = .062, FC = .753) {
     PM <- (F1 * rpm) * (F2 * P.perc)
     PM <- PM * FC
