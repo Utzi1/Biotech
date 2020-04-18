@@ -1,0 +1,62 @@
+CellVit                 Compute the cell vitality
+Eadie_Hofstee           Draw an Eadie-Hofstee graph (and compute the
+                        y-axis intercept)
+K.Zlokarnik             Compute K and m from Zlokarnik-Korrelation
+LinMod_CEv              Linear model for concentration evaluation
+Lineweaver_Burk         Plot a Lineweaver-Burk diagram and compute the
+                        ordinate intercept
+MM_typ                  Plot a non linear regression for
+                        Michaelis-Menten type enzyme
+MultiRate               Compute the cell vitality after frosting
+PGVL                    Power input of a bubble column reactor
+PM                      The power-input via the motor
+VDi                     Compute the dispersion volume mind the units
+c.any                   Compute the concentration of the source salts
+                        for specific elements inside a
+                        fermentationbroth
+conc.4PL                Compute the concentration of an competitive
+                        ELISA based on the 4-Parameter-logistic
+                        function
+conc.from.abs           Functions to compute concentration values in
+                        absorption-spectroscopy
+conc.per.dil            Compute the concentration after a dilution step
+conc_eval               concentration evaluation
+dilfact                 Computing a dilution factor, a sample volume
+                        (Vorlagevolumen), concentration after dilution
+                        Compute the dilution factor
+dose_response_plot      A dose~response plot with a summary
+eG                      Compute gas content Keep an eye on the units
+eG.empir                Empiric prediction function for the Gas holdup
+                        (eG)
+eGR_CMC                 gas content upstream column for non nowton
+                        fluids
+eGR_H2O                 gas content of upstream column for a bubble
+                        column reactor
+eGT                     compute the total gas content (eGT) of an
+                        airlift-reactor with a single riser and a
+                        single downer
+eta.eff                 rheological modeling for highly non-newtonian
+                        fluids estimate of Ostwald & de Waele
+kLa.eG                  compute kLa via eG (gas holdup)
+kLaD                    Title
+kLaD.korr.H2O           Title
+kLaD.korr.nN            non-newton-korrelation model for the kLa
+mix.t.H2O               mixing time of H2O based on korrelation
+mix.t.nN                Title
+mt                      compute the mixing time
+plot_MM_direct          Create a non-linear Regression for a
+                        Michaelis-Menten type Enzyme with a little
+                        knowlege of its Km and Vmax
+plot_regression         Generic plotting function for usage with any
+                        absorption spectroscopic data
+samp.vol                Compute sample (Vorlage) volumes V_vor =
+                        (V_soll * c_soll) / c_ist
+uG                      compute the superficial velocity
+velG.cal                compute the actual gas flow (eliminate the
+                        error of the rotameter) of either the big
+                        airlift reactor or the smaller one used at the
+                        Biotechnikum at Forum Seestraße
+vitality                Vitality of a cell population
+vitrate                 Vitality rate of a cell population
+vol.act                 generic functions to determin protein activity
+yield                   Compute yield count

@@ -5,8 +5,10 @@
 #' @param xlab lable for the abscissa
 #' @param ylab lable for the ordinate
 #'
-#' @return a plot
 #' @export
+#'
+#' @return a plot
+
 dose_response_plot <- function (conc, resp, xlab = "conc", ylab = "resp") {
     fit <-  dr4pl::dr4pl(resp~conc)
     plt  <- base::plot(fit,

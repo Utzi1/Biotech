@@ -19,8 +19,7 @@
 #'
 #'
 Eadie_Hofstee <- function(vel, sub, titleEDH = "Eadie-Hostee-Plot",
-                          xlable = "vel/sub", ylable = "sub",
-                          printfigure = TRUE ){
+                          xlable = "vel/sub", ylable = "sub"){
   EHPlot <-   ggplot2::ggplot(mapping = ggplot2::aes(
     x = vel/sub,
     y = vel)
@@ -33,12 +32,8 @@ Eadie_Hofstee <- function(vel, sub, titleEDH = "Eadie-Hostee-Plot",
     ggplot2::ggtitle(titleEDH)+
     ggplot2::xlab(xlable)+
     ggplot2::ylab(ylable)
-  if(printfigure){
-    plot(EHPlot)
-  }
   EHModel <- stats::lm(vel/sub~vel)
   EHSummary <- base::summary(EHModel)
-
   return(list(EHPlot=EHPlot, EHmodel=EHModel, EHSummary))
 }
 

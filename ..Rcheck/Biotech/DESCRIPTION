@@ -13,9 +13,7 @@ Maintainer: Utz Rieger <s71564@beuth-hochschule.de>
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-Suggests: 
-    testthat
+Suggests: testthat
 RoxygenNote: 7.1.0
-Imports: 
-    ggplot2,
-    magrittr
+Imports: ggplot2, magrittr
+Built: R 3.6.3; ; 2020-04-17 17:25:56 UTC; unix

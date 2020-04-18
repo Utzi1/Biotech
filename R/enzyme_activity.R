@@ -4,7 +4,7 @@
 #'
 #' @param vol.tot total volume, default is 1
 #' @param dfac dilution factor, default is 1
-#' @param delta.E $\Delta$E (without default)
+#' @param delta.E Delta E (without default)
 #' @param vol.test test volume (without default)
 #' @param epsilon molar attenuation coefficient (without default)
 #' @param cuvette cuvette factor or path length, default is 1
