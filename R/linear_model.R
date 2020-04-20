@@ -6,7 +6,7 @@
 #' @param abs list
 #' @param conc list
 #'
-#' @return Dataframe
+#' @return summary of the regression
 #' @export
 #'
 LinMod <- function(abs, conc) {
