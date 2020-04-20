@@ -18,4 +18,5 @@ Suggests:
 RoxygenNote: 7.1.0
 Imports: 
     ggplot2,
-    magrittr
+    magrittr,
+    dr4pl

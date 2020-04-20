@@ -11,7 +11,7 @@
 
 dose_response_plot <- function (conc, resp, xlab = "conc", ylab = "resp") {
     fit <-  dr4pl::dr4pl(resp~conc)
-    plt  <- base::plot(fit,
+    plt  <- graphics::plot(fit,
                 text.x = xlab ,
                 text.y = ylab ,
                 indices.outliner = fit$idx.outliner)

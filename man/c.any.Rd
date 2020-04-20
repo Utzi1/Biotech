@@ -4,14 +4,14 @@
 \alias{c.any}
 \title{Compute the concentration of the source salts for specific elements inside a fermentationbroth}
 \usage{
-\method{c}{any}(ds, ele = c("P", "N", "K", "Mg"), org = c("Bacteria", "Fungus"))
+\method{c}{any}(ds, ele = "P", org = "Bacteria")
 }
 \arguments{
 \item{ds}{dry substance mass in g/l}
 
-\item{ele}{element abreveation as string}
+\item{ele}{element abreveation as string can be list('P', 'N', 'K','Mg')}
 
-\item{org}{organism as string}
+\item{org}{organism as string can be list('Bacteria', 'Fungus')}
 }
 \value{
 concentration of salt within the broth

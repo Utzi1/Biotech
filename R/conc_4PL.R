@@ -4,9 +4,10 @@
 #' @param std.resp the measured absorbance of the calibrators
 #' @param mes.resp the measured absorbance of the samples of unknown concentration
 #'
-#' @return the model-fit and the concentration of the samples
-#' @export
 #'
+#' @return the model-fit and the concentration of the samples
+#'
+#' @export
 conc.4PL <- function (std.conc,
                       std.resp,
                       mes.resp) {

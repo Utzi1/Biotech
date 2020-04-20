@@ -16,8 +16,8 @@ names(source.mol.weight) <- c('P', 'N', 'K','Mg')
 #' Compute the concentration of the source salts for specific elements inside a fermentationbroth
 #'
 #' @param ds dry substance mass in g/l
-#' @param ele element abreveation as string
-#' @param org organism as string
+#' @param ele element abreveation as string can be list('P', 'N', 'K','Mg')
+#' @param org organism as string can be list('Bacteria', 'Fungus')
 #'
 #' @return concentration of salt within the broth
 #' @export
@@ -28,8 +28,8 @@ names(source.mol.weight) <- c('P', 'N', 'K','Mg')
 #' # c.any(ds = 50, ele = "N", org = 'Fungus')
 c.any  <- function (
                     ds,
-                    ele = c('P', 'N', 'K','Mg'),
-                    org = c('Bacteria', 'Fungus')
+                    ele = "P",
+                    org = "Bacteria"
                     ) {
     if (ele != 'N' ) {
         c.any <- ( ( ds * Ele[org, ele] * source.mol.weight[ele]) / mol.weight[ele] )

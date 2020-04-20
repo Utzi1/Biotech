@@ -16,3 +16,4 @@ conc_eval <- function(abs_P, abs_std, conc_std){
               abs_P * LinMod$coefficients[2] + LinMod$coefficients[1]
   )
 }
+
