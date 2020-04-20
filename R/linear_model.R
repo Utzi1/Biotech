@@ -9,12 +9,11 @@
 #' @return Dataframe
 #' @export
 #'
-LinMod_CEv <- function(abs, conc) {
+LinMod <- function(abs, conc) {
   return(
   stats::lm(
     conc ~ abs
-  )
+  ) %>%
+    base::summary()
 )
-  return(summary(LinMod_CEv))
 }
-
