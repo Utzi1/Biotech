@@ -10,10 +10,9 @@
 #' @export
 #'
 LinMod <- function(abs, conc) {
-  return(
-  stats::lm(
+  mod <- stats::lm(
     conc ~ abs
   ) %>%
     base::summary()
-)
+  return(mod)
 }
