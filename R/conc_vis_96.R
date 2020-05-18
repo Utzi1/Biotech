@@ -28,12 +28,13 @@ concVis96.trimmed <-
 #' Visualisation of a 96-Wellplate (concentration) without triming of any cols or rows
 #' 
 #' this method uses a dataframe of 8x12 values to show the measured value of each well as a colorgradient
-#' @param plate 
+#' @param plate the plate to be visualised as dataframe
 #'
-#' @return
+#' @return a neat looking matrix with the concentration as color-gradient
 #' @export
 #'
 #' @examples
+#' 
 #' \dontrun{
 #'  matrix(rnorm(96), nrow = 8, ncol = 12) %>%
 #'   as.data.frame() %>%
