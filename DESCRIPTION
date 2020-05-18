@@ -1,16 +1,23 @@
 Package: Biotech
-Title: What the Package Does (One Line, Title Case)
-Version: 0.0.0.9000
+Title: Diverse applications for Biotechnologies
+Version: 0.0.0.9001
 Authors@R: 
-    person(given = "First",
-           family = "Last",
+    person(given = "Utz",
+           family = "Rieger",
            role = c("aut", "cre"),
-           email = "first.last@example.com",
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
-License: `use_mit_license()`, `use_gpl3_license()` or friends to
-    pick a license
+           email = "s71564@beuth-hochschule.de",
+           comment = structure("YOUR-ORCID-ID", .Names = "ORCID"))
+Description: Software for Biotechnology students with the aim to popularise the usage of R as great tool for data-handling and manipulation.
+Author: Utz Rieger <s71564@beuth-hochschule.de>
+Maintainer: Utz Rieger <s71564@beuth-hochschule.de>
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-Roxygen: list(markdown = TRUE)
+Suggests: 
+    testthat
 RoxygenNote: 7.1.0
+Imports: 
+    ggplot2,
+    magrittr,
+    dr4pl, 
+    tidyverse

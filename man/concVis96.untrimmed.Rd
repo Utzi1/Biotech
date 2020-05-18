@@ -7,15 +7,16 @@
 concVis96.untrimmed(plate)
 }
 \arguments{
-\item{plate}{}
+\item{plate}{the plate to be visualised as dataframe}
 }
 \value{
-
+a neat looking matrix with the concentration as color-gradient
 }
 \description{
 this method uses a dataframe of 8x12 values to show the measured value of each well as a colorgradient
 }
 \examples{
+
 \dontrun{
  matrix(rnorm(96), nrow = 8, ncol = 12) \%>\%
   as.data.frame() \%>\%
