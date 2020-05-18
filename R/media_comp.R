@@ -24,21 +24,21 @@ names(source.mol.weight) <- c('P', 'N', 'K','Mg')
 #'
 #' @examples
 #'
-#' # c.any(ds = 50, ele = 'P', org = 'Fungus')
-#' # c.any(ds = 50, ele = "N", org = 'Fungus')
-c.any  <- function (
+#' # c_any(ds = 50, ele = 'P', org = 'Fungus')
+#' # c_any(ds = 50, ele = "N", org = 'Fungus')
+c_any  <- function (
                     ds,
                     ele = "P",
                     org = "Bacteria"
                     ) {
     if (ele != 'N' ) {
-        c.any <- ( ( ds * Ele[org, ele] * source.mol.weight[ele]) / mol.weight[ele] )
-        return((c.any/100))
+        c_any <- ( ( ds * Ele[org, ele] * source.mol.weight[ele]) / mol.weight[ele] )
+        return((c_any/100))
     } else if ( ele == 'N' ) {
         c.P<- ( ( ds * Ele[org, 'P'] * source.mol.weight['P']) / mol.weight['P'] )
         c.N.P <- c.P / mol.weight[ele]
-        c.any <- ( ( ( ds * Ele[org, ele] - c.N.P) * source.mol.weight[ele]) / (2*mol.weight[ele]) )
-        return((c.any/100))
+        c_any <- ( ( ( ds * Ele[org, ele] - c.N.P) * source.mol.weight[ele]) / (2*mol.weight[ele]) )
+        return((c_any/100))
     }
 }
 

@@ -7,7 +7,7 @@ Authors@R:
            role = c("aut", "cre"),
            email = "s71564@beuth-hochschule.de",
            comment = structure("YOUR-ORCID-ID", .Names = "ORCID"))
-Description: Software for Biotechnology students with the aim to popularise the usage of R as great tool for data-handling and manipulation
+Description: Software for Biotechnology students with the aim to popularise the usage of R as great tool for data-handling and manipulation.
 Author: Utz Rieger <s71564@beuth-hochschule.de>
 Maintainer: Utz Rieger <s71564@beuth-hochschule.de>
 License: MIT + file LICENSE
@@ -19,4 +19,5 @@ RoxygenNote: 7.1.0
 Imports: 
     ggplot2,
     magrittr,
-    dr4pl
+    dr4pl, 
+    tidyverse

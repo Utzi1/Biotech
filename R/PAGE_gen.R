@@ -7,7 +7,7 @@ PAGE.gen <- function (marker.w, # Marker weights
                       plot.PAGE = FALSE) {
     ##### evals ######################################################################
     RF <- marker.d/max(marker.d)
-    mod <- lm(log10(marker.w)~RF)
+    mod <- stats::lm(log10(marker.w)~RF)
     unknown.w <- (
                   mod$coefficients[2]* (unknown.d/max(marker.d)) + mod$coefficients[1]
     )
@@ -17,7 +17,7 @@ PAGE.gen <- function (marker.w, # Marker weights
     } else if (plot.PAGE == TRUE) {
         return(
                list(
-    ggplot2::ggplot(mapping = ggplot2::aes(y = log10(Weight_Marker) ,x = RF))+
+    ggplot2::ggplot(mapping = ggplot2::aes(y = log10(marker.w) ,x = RF))+
         ggplot2::geom_point()+
         ggplot2::geom_smooth(method = "lm")+
         ggplot2::theme_minimal()+
