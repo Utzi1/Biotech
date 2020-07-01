@@ -10,6 +10,8 @@ concVis96.untrimmed(plate)
 \item{plate}{the plate to be visualised as dataframe}
 }
 \value{
+a neat looking plot with the absorption intensity as color-gradient
+
 a neat looking matrix with the concentration as color-gradient
 }
 \description{

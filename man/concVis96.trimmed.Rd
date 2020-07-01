@@ -10,7 +10,7 @@ concVis96.trimmed(plate)
 \item{plate}{the plate to be visualised as dataframe}
 }
 \value{
-a neat looking matrix with the concentration as color-gradient
+a neat looking plot with the absorption intensity as color-gradient
 }
 \description{
 This method trims of the first first row and col of by default

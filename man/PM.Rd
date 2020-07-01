@@ -18,7 +18,7 @@ PM(P.perc, rpm, F1 = 0.107, F2 = 0.062, FC = 0.753)
 \item{FC}{degree of efficiency}
 }
 \value{
-
+power-input
 }
 \description{
 The power-input via the motor

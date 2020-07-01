@@ -4,7 +4,7 @@
 #' 
 #' @param plate the plate to be visualised as dataframe
 #'
-#' @return a neat looking matrix with the concentration as color-gradient 
+#' @return a neat looking plot with the absorption intensity as color-gradient 
 #' @export
 #'
 #' @examples
@@ -30,6 +30,7 @@ concVis96.trimmed <-
 #' this method uses a dataframe of 8x12 values to show the measured value of each well as a colorgradient
 #' @param plate the plate to be visualised as dataframe
 #'
+#' @return a neat looking plot with the absorption intensity as color-gradient 
 #' @return a neat looking matrix with the concentration as color-gradient
 #' @export
 #'

@@ -7,7 +7,7 @@
 #' @param ylab lable of the ordinate
 #'
 Lineweaver_Burk <- function(sub, vel, title = "Lineweaver-Burk-Plot", xlab = "1/sub", ylab = "1/vel"){
- LiBePlt <- (ggplot2::ggplot(mapping = ggplot2::aes(
+ LiBuPlt <- (ggplot2::ggplot(mapping = ggplot2::aes(
     x = 1/sub,
     y = 1/vel
   ))+

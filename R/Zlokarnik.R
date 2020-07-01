@@ -12,7 +12,7 @@ KV <- c(8.51, 8.52 , 8.54 , 8.57 )
 #' @param F2 armature current / motor power in percent
 #' @param FC  degree of efficiency
 #'
-#' @return
+#' @return power-input
 #' @export
 #'
 PM <- function (P.perc, rpm, F1 = .107, F2 = .062, FC = .753) {

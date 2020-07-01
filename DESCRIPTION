@@ -8,6 +8,7 @@ Authors@R:
            email = "s71564@beuth-hochschule.de",
            comment = structure("YOUR-ORCID-ID", .Names = "ORCID"))
 Description: Software for Biotechnology students with the aim to popularise the usage of R as great tool for data-handling and manipulation.
+Depends: R (>= 3.1.0)
 Author: Utz Rieger <s71564@beuth-hochschule.de>
 Maintainer: Utz Rieger <s71564@beuth-hochschule.de>
 License: MIT + file LICENSE

@@ -1,6 +1,17 @@
 
 # defining the basic fun:
 
+#' Function to analyse a PAGE 
+#'
+#' @param marker.w weight of marker protein
+#' @param marker.d marker-band distance
+#' @param unknown.d distance of a unknown sample-band
+#' @param plot.PAGE want a plot? Set TRUE or FALSE
+#'
+#' @return
+#' @export
+#'
+#' @examples
 PAGE.gen <- function (marker.w, # Marker weights
                       marker.d, # Marker distance
                       unknown.d, # distance of unknown bands
